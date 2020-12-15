@@ -1,0 +1,45 @@
+#-----------------------------------------------
+#Name: NGUYEN DUY TINH
+#Student ID: 1852797
+#Subject: Computer Engineering
+#Course: Computer Architecture
+#Assignment: 5
+#Question: 1
+#-----------------------------------------------
+.data
+	read:	.asciiz " Fill an integer: "
+	endl:	.asciiz"\n"
+	res: 	.asciiz " There the sum of all integer above: "
+.text
+	li $s1 , 0 
+     
+   int:
+     	la $a0 , read
+    	li $v0 , 4
+     	syscall
+          
+     	li $v0 , 5 #code of real number
+     	syscall 
+     	addi $t0 , $v0 , 0
+     	ble $t0 , 0 ,  result #check if the number is positive or not
+     	add $s1 , $s1 , $t0 
+     
+     	la $a0 , endl
+     	li $v0 , 4
+     	syscall
+     	j  int
+       
+   result:
+#print     
+     	la $a0 , res
+     	li $v0 , 4
+     	syscall
+      
+     	addi $a0 , $s1 , 0
+     	la $v0, 1
+     	syscall 
+     
+           
+     
+     
+     

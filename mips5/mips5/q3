@@ -1,0 +1,65 @@
+#-----------------------------------------------
+#Name: NGUYEN DUY TINH
+#Student ID: 1852797
+#Subject: Computer Engineering
+#Course: Computer Architecture
+#Assignment: 5
+#Question: 2
+#-----------------------------------------------
+.data 
+	myArray: .word 22, 11, 99, 31, 99, 10, 55, 78, 80, 65
+    	int: .asciiz " Input an integer: " 
+    	out1: .asciiz "The number exist in the array in position: "
+    	out2: .asciiz "The number does not exist in the array."
+    	endl: .asciiz "\n"
+.text
+    main: 
+    	la $a0 , int
+    	li $v0 , 4 
+    	syscall
+    
+    	li $s0 , 0 # value
+    	li $s1 , 0 # index
+     
+    	li $v0 , 5 
+    	syscall
+    	addi $t0 , $v0 , 0
+    
+    find: 
+    	lw $t1 , myArray($s0) 
+    	beq $t0 , $t1 , true
+    	addi $s0 , $s0 , 4 # move to next
+    	addi $s1 , $s1 , 1 # i = i + 1
+    	beq $s1 , 10 , false
+    	j find 
+    
+    
+    false:
+    	la $a0 , out2
+    	la $v0 , 4
+    	syscall
+    	j exit
+    
+    true:
+    	la $a0 , out1 	
+    	la $v0 , 4
+    	syscall
+    
+    	addi $a0 , $s1 , 0 
+    	la $v0 , 1 
+    	syscall
+    
+    exit:
+    	li $v0,10
+    	syscall
+    
+    
+   
+    
+    
+    
+     
+    
+    
+    
+    

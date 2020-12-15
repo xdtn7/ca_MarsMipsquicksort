@@ -1,0 +1,81 @@
+#-----------------------------------------------
+#Name: NGUYEN DUY TINH
+#Student ID: 1852797
+#Subject: Computer Engineering
+#Course: Computer Architecture
+#Assignment: 5
+#Question: 2
+#-----------------------------------------------
+.data 
+	int: .asciiz " Please input an integer: "
+ 	int2: .asciiz " Please input an another integer numbers: "
+ 	endl: 	.asciiz"\n"
+ 	out0: .asciiz " b+c= "
+ 	out1: .asciiz " b-c= "
+ 	out2: .asciiz " c-b= "
+.text
+    main : 
+ 	li $s1 , 10
+  	li $s2 , 5 
+    
+  	la $a0 , int 
+  	li $v0 , 4
+  	syscall 
+  	j read
+    
+    read: 
+    	li $v0 , 5
+    	syscall
+    	addi $s0 , $v0 , 0
+    
+    	la $a0 , endl
+    	li $v0 , 4
+    	syscall
+    
+    	beq $s0 , 0 , c0
+    	beq $s0 , 1 , c1
+    	beq $s0 , 2 , c2
+    	j  default 
+    
+    c0: 
+    	la $a0 , out0
+    	li $v0 , 4
+    	syscall 
+    
+    	add $a0 , $s1 , $s2 
+    	li $v0 , 1 
+    	syscall 
+    	j exit
+    
+    c1: 
+    	la $a0 , out1
+    	li $v0 , 4
+    	syscall 
+    
+    	sub	 $a0 , $s1 , $s2 
+    	li $v0 , 1 
+    	syscall 
+    	j exit 
+    
+    c2: 
+    	la $a0 , out2 
+    	li $v0 , 4
+    	syscall 
+    
+    	sub $a0 , $s2 , $s1 
+    	li $v0 , 1 
+    	syscall 
+    	j exit 
+    
+    default:
+    	la $a0 , int2 
+    	li $v0 , 4
+    	syscall
+    	j read
+    
+    exit:
+    	li $v0,10
+    	syscall
+    
+    
+    
